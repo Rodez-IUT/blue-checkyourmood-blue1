@@ -1,0 +1,151 @@
+/* Style textuel*/
+
+h1 {
+    color: #EA454C;
+}
+
+.rougeClair {
+    color: #EA454C;
+}
+
+.texteGris {
+    color: rgb(100, 82, 82);
+}
+
+.texteNoir {
+    color: #000000;
+}
+
+a:link { 
+ text-decoration:none; 
+} 
+
+
+/* Alignement page*/
+
+.centrer {
+    text-align: center;
+}
+
+.gauche {
+    text-align: left;
+}
+
+/* Espacement */
+.droite {
+    text-align: right;
+}
+
+.espace0 {
+    margin-bottom: 10px;
+}
+
+.espace1 {
+    margin-bottom: 40px;
+}
+
+.espace2 {
+    margin-bottom: 80px;
+}
+
+.espace3 {
+    margin-bottom: 120px;
+}
+
+.espace4 {
+    margin-bottom: 160px;
+}
+
+/* Page connexion */
+
+.cadreConnexion {
+    border-radius: 15px;
+    border-style: solid;
+}
+
+/* Page d'accueil */
+
+.texteBouton {
+    color:  rgb(100, 82, 82);
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 120px;
+
+}
+
+.zoom {
+    padding: 1em;
+    border: 5px solid #BFBFBF;
+    height: 400px;
+    transition: .3s;
+    border-radius: 12px;
+    width: 100%;
+    background-color: transparent;
+}
+  
+.zoom:hover {
+    border: 5px solid #EA454C;
+
+/* -ms-transform: scale(1.1); /* IE 9 */
+/* -webkit-transform: scale(1.1); /* Safari 3-8 */
+/* transform: scale(1.1); */ 
+}
+
+.icon-accueil {
+    font-size: 100px;
+}
+
+/* Page saisie humeur */
+
+input[type="datetime-local"] {
+    padding: 5px;
+    top: 50%;
+    font-family: "Roboto Mono",monospace;
+    color: black;
+    border-width: 0.5px;
+    border-radius: 5px;
+    width:352px;
+}
+::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.file-upload {
+
+    height:60px;
+    width:300px;
+    border-radius: 12px;
+    
+    display:flex;
+    justify-content:center;
+    align-items: center;  
+
+    border:1px solid #000000;
+    background-color: whitesmoke ;
+    font-size:45px;
+
+    margin-left: 25px;
+}
+
+input[type='file'] {
+
+    width:300px;
+    position:absolute;
+    opacity:0;
+    cursor:pointer;
+
+}
+
+/* Calendrier */
+
+#calendar {
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+
+
+
