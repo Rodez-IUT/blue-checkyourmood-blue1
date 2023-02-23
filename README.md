@@ -35,8 +35,8 @@ Ce projet sera développer au sein d'une équipe de 4 développeur :
           <ul>
             <li>Amine Daamouch</li>
             <li>Thibauld cosatti (Scrum master)</li>
-            <li>Jules Blanchard</li>
-            <li>Mateo Faussurier (Product Owner) </li>
+            <li>Jules Blanchard (Product Owner)</li>
+            <li>Mateo Faussurier  </li>
           </ul>
 
 ## Lien 
