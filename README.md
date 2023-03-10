@@ -40,7 +40,7 @@ Ce projet sera développer au sein d'une équipe de 4 développeur :
           </ul>
 
 ## Lien 
-
+lien vers le site CYM : https://gorascheckyourmood.000webhostapp.com/ <br>
 lien vers le dossier drive : https://drive.google.com/drive/folders/1HFZnI1J1juEisflIj2r8plbB5WDRZE6v?usp=share_link <br>
 lien vers l'audit : https://docs.google.com/document/d/1yWLsbn7EVCcUUkpKMCz0_se3vjKjziVG/edit?usp=sharing&ouid=116411711454989662219&rtpof=true&sd=true <br>
 Lien vers le board zenhub :https://github.com/rodez-iut/blue-checkyourmood-blue1#workspaces/cym-droid-blue-1-63fbbc1d607976d4f9d924f5/board
