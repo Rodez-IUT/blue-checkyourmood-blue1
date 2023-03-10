@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="marge_gauche">4dp</dimen>
+    <dimen name="marge_droite">4dp</dimen>
+    <dimen name="taille_titre">20sp</dimen>
+    <dimen name="taille_texte">14sp</dimen>
+    <dimen name="padding_gauche">4dp</dimen>
+    <dimen name="padding_droit">20dp</dimen>
+    <dimen name="padding_bas">40dp</dimen>
+    <dimen name="padding_haut">40dp</dimen>
+
+</resources>

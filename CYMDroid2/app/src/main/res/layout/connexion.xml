@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:stretchColumns="1">
+
+    <TextView
+        style="@style/titrePage"
+        android:id="@+id/textview_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titre"
+
+        />
+
+    <TableRow>
+
+        <TextView
+            style="@style/texte"
+            android:text="@string/id"
+            android:textSize="@dimen/taille_texte"/>
+        <EditText
+            android:id="@+id/edittext_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="identifiant"
+            android:inputType="text" />
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            style="@style/texte"
+            android:text="@string/mdp"
+            android:textSize="@dimen/taille_texte"/>
+
+    <EditText
+        android:id="@+id/edittext_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="mot de passe"
+        android:inputType="textPassword" />
+
+    </TableRow>
+    <TableRow>
+        <Button
+
+            style="@style/bouton"
+            android:layout_marginTop="@dimen/padding_haut"
+            android:layout_span="2"
+            android:id="@+id/button_login"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/btnCouleur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/connexion" />
+    </TableRow>
+
+
+</TableLayout>

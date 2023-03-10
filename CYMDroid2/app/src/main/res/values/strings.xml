@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CYMDroid</string>
+    <string name="titre">Check Your Mood</string>
+    <string name="msgConnexion">Bienvenue, saisissez vos identifiants</string>
+    <string name="bienvenue">Bienvenue, saisisiez vos identifiants</string>
+    <string name="id">Identifiant :</string>
+    <string name="mdp">Mot de passe : </string>
+    <string name="connexion">se connecter</string>
+
+</resources>
