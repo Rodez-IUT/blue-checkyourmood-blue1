@@ -24,8 +24,7 @@ use model\afficher;
 class modificationMotDePasseController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -47,9 +46,9 @@ class modificationMotDePasseController implements controller
             error_reporting(0);
             session_start();
             $identifiant = $_SESSION['nom_utilisateur'];
-            $motDePasseActuel = httphelper::getParam('motDePasseActuel');
-            $nouveauMotDePasse = httphelper::getParam('nouveauMotDePasse');
-            $confirmerMdp = httphelper::getParam('confirmerMdp');
+            $motDePasseActuel = httphelper::getParam(htmlspecialchars('motDePasseActuel'));
+            $nouveauMotDePasse = httphelper::getParam(htmlspecialchars('nouveauMotDePasse'));
+            $confirmerMdp = httphelper::getParam(htmlspecialchars('confirmerMdp'));
             $codeUtilisateur = httphelper::getParam('idUtilisateur');
 
             if (connexionservice::motDePasseValide($pdo, $identifiant, $motDePasseActuel)) {

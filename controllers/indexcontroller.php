@@ -20,7 +20,7 @@ use yasmf\config;
 class indexController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)

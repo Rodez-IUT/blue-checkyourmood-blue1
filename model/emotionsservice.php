@@ -6,7 +6,8 @@ class emotionsservice
 {
 
     /**
-     * Renvoie toutes les emotions presentes dans la base de donnée
+     * Renvoie toutes les emotions presentes dans la base de données.
+     * @param pdo connexion à la base de données.
      */
     public static function getEmotions($pdo)
     {

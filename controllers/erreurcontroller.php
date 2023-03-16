@@ -14,15 +14,14 @@ use yasmf\config;
 use yasmf\httphelper;
 
 /**
- * Class erreurcontroller
- * Permet d'indiquer une erreur
+ * Permet d'indiquer une erreur dans les controlleurs.
  * @package controllers
  */
 class erreurController implements controller
 {
     /**
-     * @param pdo connexion à la base de données
-     * @return view vue retournée au routeur
+     * @param pdo connexion à la base de données.
+     * @return view vue retournée au routeur.
      */
     public function index($pdo)
     {

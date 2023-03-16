@@ -23,8 +23,7 @@ use model\humeurservice;
 class mexprimerController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -55,7 +54,7 @@ class mexprimerController implements controller
     public function exprimer($pdo)
     {
         // Récupération variable
-        $description = httphelper::getParam('newDescription');
+        $description = httphelper::getParam(htmlspecialchars('newDescription'));
         $dateHeure = httphelper::getParam('newDateHeure');
         $codeEmotion = httphelper::getParam('newCodeEmotion');
         $codeUtilisateur = httphelper::getParam('newCodeUtilisateur');

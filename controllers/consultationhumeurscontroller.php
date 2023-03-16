@@ -17,15 +17,14 @@ use model\humeurservice;
 use model\emotionsservice;
 
 /**
- * Class de consulterHumeursController
- * Permet a un utilisateur de pouvoir consulter ses humeurs
+ * Classe de consulterHumeursController
+ * Permet à un utilisateur de pouvoir consulter ses humeurs.
  * @package controllers
  */
 class consultationHumeursController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -61,8 +60,7 @@ class consultationHumeursController implements controller
     }  
 
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function consulter($pdo)

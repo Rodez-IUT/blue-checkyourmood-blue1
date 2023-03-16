@@ -18,14 +18,13 @@ use model\afficher;
 /**
  * Class connexioncontroller
  * Permet a un utilisateur de se connecter a l'application
- * et d'acceder a la page d'accueil
+ * et d'acceder a la page d'accueil.
  * @package controllers
  */
 class connexionController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -36,7 +35,7 @@ class connexionController implements controller
     }
 
     /**
-     * Tentative de connexion
+     * Connexion à la base de données utilisateur.
      * @param pdo connexion à la base de données
      * @return view appel de la méthode index
      */
@@ -66,7 +65,6 @@ class connexionController implements controller
 
         if ($connect) {
             
-            //TODO faire la mise en place des sessions et appeler la methode getUtilisateur 
             session_start();
             $user = connexionservice::getUtilisateur($pdo, $identifiant);
 
@@ -89,7 +87,7 @@ class connexionController implements controller
     }
 
     /**
-     * Deconnexion
+     * Deconnexion 'un utilisateur.
      * @return view appel de la méthode index
      */
     public function deconnexion($pdo) 

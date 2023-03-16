@@ -16,16 +16,14 @@ use model\verificationservice;
 use model\utilisateurservice;
 
 /**
- * Class inscriptionController
  * Permet a un utilisateur de s'inscrire sur l'application
  * @package controllers
  */
 class inscriptionController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
-     * @return view vue retournée au routeur
+     * @param pdo connexion à la base de données.
+     * @return view vue retournée au routeur.
      */
     public function index($pdo)
     {
@@ -55,7 +53,7 @@ class inscriptionController implements controller
     }  
 
     /**
-     * Tentative de creation d'un utilisateur
+     * Tentative de creation d'un utilisateur.
      * @param pdo connexion à la base de données
      * @return view appel de la méthode index
      */
@@ -65,14 +63,14 @@ class inscriptionController implements controller
         if (!empty(httphelper::getParam('affichage'))) {
 
             // Récupération variable
-            $nom = httphelper::getParam('newNom');
-            $prenom = httphelper::getParam('newPrenom');
-            $mail = httphelper::getParam('newMail');
-            $nomUtilisateur = httphelper::getParam('newNomUtilisateur');
-            $genre = httphelper::getParam('newGenre');
-            $dateNaissance = httphelper::getParam('newDateNaissance');
-            $motDePasse1 = httphelper::getParam('newMotDePasse1');
-            $motDePasse2 = httphelper::getParam('newMotDePasse2');
+            $nom = httphelper::getParam(htmlspecialchars('newNom'));
+            $prenom = httphelper::getParam(htmlspecialchars('newPrenom'));
+            $mail = httphelper::getParam(htmlspecialchars('newMail'));
+            $nomUtilisateur = httphelper::getParam(htmlspecialchars('newNomUtilisateur'));
+            $genre = httphelper::getParam(htmlspecialchars('newGenre'));
+            $dateNaissance = httphelper::getParam(htmlspecialchars('newDateNaissance'));
+            $motDePasse1 = httphelper::getParam(htmlspecialchars('newMotDePasse1'));
+            $motDePasse2 = httphelper::getParam(htmlspecialchars('newMotDePasse2'));
 
             // Test des variables
             $_POST['nomOK'] = $nomOK = verificationservice::testNom($nom);

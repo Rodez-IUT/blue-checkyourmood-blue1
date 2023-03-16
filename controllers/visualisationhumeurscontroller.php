@@ -23,8 +23,7 @@ use model\stathumeurservice;
 class visualisationHumeursController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
-     * @param $err message d'erreur
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)

@@ -23,7 +23,7 @@ use model\utilisateurservice;
 class profilController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -36,7 +36,8 @@ class profilController implements controller
     }
 
     /**
-     * Supprime le profil de l'utilisateur le désinscrit de l'application
+     * Supprime le profil de l'utilisateur le désinscrit de l'application.
+     * @param pdo connexion à la base de données.
      */
     public function supprimerProfil($pdo)
     {

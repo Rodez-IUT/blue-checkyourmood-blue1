@@ -74,7 +74,7 @@ if (!isset($_SESSION['prenom']) && !isset($_SESSION['nom'])) {
                             <tr>
                                 <td><?php echo "Le ".date_format($dateHeure,"Y/m/d")." à ".date_format($dateHeure,"H")."h".date_format($dateHeure,"i") ?></td>
                                 <td><?php echo($humeur['EMOJI'].' - '.$humeur['NOM']) ?></td>
-                                <td><?php echo($humeur['DESCRIPTION']) ?></td>
+                                <td><?php echo(htmlspecialchars($humeur['DESCRIPTION'])) ?></td>
                                 <!-- Verification si la date est inferieure a 2 heures pour afficher le bouton supprimer -->
                                 
                                 <td>

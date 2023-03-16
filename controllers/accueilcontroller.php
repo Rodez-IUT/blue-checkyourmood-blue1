@@ -13,14 +13,13 @@ use yasmf\controller;
 use yasmf\config;
 
 /**
- * Class accueilController
  * Page d'accueil permet d'appeler la vue pour la page d'accueil de l'application
  * @package controllers
  */
 class accueilController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)

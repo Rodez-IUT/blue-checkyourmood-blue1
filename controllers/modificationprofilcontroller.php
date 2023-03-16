@@ -25,7 +25,7 @@ use model\utilisateurservice;
 class ModificationProfilController implements controller
 {
     /**
-     * @param $pdo connexion à la base de données
+     * @param pdo connexion à la base de données
      * @return view vue retournée au routeur
      */
     public function index($pdo)
@@ -58,7 +58,8 @@ class ModificationProfilController implements controller
     }
 
     /**
-     * Modifie le profil de l'utilisateur
+     * Modifie le profil de l'utilisateur.
+     * @param pdo connexion à la base de données.
      */
     public function modifierProfil($pdo)
     {
@@ -101,7 +102,8 @@ class ModificationProfilController implements controller
     }
 
     /**
-     * Modifie le mot de passe de l'utilisateur
+     * Modifie le mot de passe de l'utilisateur.
+     * @param pdo connexion à la base de données.
      */
     public function modifierMotDePasse($pdo)
     {
