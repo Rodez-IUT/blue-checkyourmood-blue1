@@ -88,7 +88,8 @@ class connexionController implements controller
 
     /**
      * Deconnexion 'un utilisateur.
-     * @return view appel de la méthode index
+     * @param pdo connexion à la base de données.
+     * @return view appel de la méthode index.
      */
     public function deconnexion($pdo) 
     {

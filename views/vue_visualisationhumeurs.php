@@ -170,7 +170,7 @@ if (!isset($_SESSION['prenom']) && !isset($_SESSION['nom'])) {
                 new Chart(document.getElementById("lineChart"), {
                     type: 'line',
                     data: {
-                        labels: <?php echo $tableauDates; ?>,
+                        labels:<?php echo $tableauDates; ?>,
                         datasets: [{ 
                             data: <?php echo $tableau1; ?>,
                             label: "Admiration",
