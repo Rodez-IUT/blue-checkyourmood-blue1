@@ -28,8 +28,9 @@ indifférente l’application Web CheckYourMood.
  <li>PHP unit</li>
  <li>Xdebug</li>
  <li>Yasmf</li>
-
- <b>Suivi de projet</b>
+</ul>
+<ul>
+<b>Suivi de projet</b>
  <li>Gantt Project</li>
  <li>Zenhub</li>
  <li>Google sheets(suivie des temps)</li>
