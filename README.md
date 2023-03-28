@@ -23,7 +23,11 @@ indifférente l’application Web CheckYourMood.
 ## Les Outils :
 <ul>Developpement :
  <li>Android Studio</li>
- <li>...</li>
+ <li>Php Stan</li>
+ <li>PHP unit</li>
+ <li>Xdebug</li>
+ <li>Yasmf</li>
+
  Suivi de projet: 
  <li>Gantt Project</li>
  <li>Zenhub</li>
