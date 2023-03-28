@@ -21,14 +21,16 @@ de son projet en temps et en heure.
 Dans la suite du document, les termes "application", "plateforme" ou "logiciel" désignent de manière
 indifférente l’application Web CheckYourMood.
 ## Les Outils :
-<ul>Developpement<br> 
+<ul>Developpement
+ 
  <li>Android Studio</li>
  <li>Php Stan</li>
  <li>PHP unit</li>
  <li>Xdebug</li>
  <li>Yasmf</li>
+
+ Suivi de projet
 <br>
- Suivi de projet<br>
  <li>Gantt Project</li>
  <li>Zenhub</li>
  <li>Google sheets(suivie des temps)</li>
