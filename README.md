@@ -21,7 +21,7 @@ de son projet en temps et en heure.
 Dans la suite du document, les termes "application", "plateforme" ou "logiciel" désignent de manière
 indifférente l’application Web CheckYourMood.
 ## Les Outils :
-<ul>Developpement :
+<ul>Developpement 
  <li>Android Studio</li>
  <li>Php Stan</li>
  <li>PHP unit</li>
