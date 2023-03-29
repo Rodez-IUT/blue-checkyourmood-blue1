@@ -8,7 +8,7 @@ class emotionsservice
     /**
      * Renvoie toutes les emotions presentes dans la base de donnée
      */
-    public static function getEmotions($pdo)
+    public function getEmotions($pdo)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM emotion");

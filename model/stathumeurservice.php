@@ -9,7 +9,7 @@ class stathumeurservice
     /**
      * Renvoie toutes les emotions presentes dans la base de donnée
      */
-    public static function getNbEmotion($pdo, $codeUtilisateur)
+    public function getNbEmotion($pdo, $codeUtilisateur)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM emotion");
@@ -38,7 +38,7 @@ class stathumeurservice
         }
     }
 
-    public static function getNbEmotionDates($pdo, $codeUtilisateur, $date)
+    public function getNbEmotionDates($pdo, $codeUtilisateur, $date)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM emotion");
@@ -71,7 +71,7 @@ class stathumeurservice
      /**
      * Renvoie les humeurs selon une intervalle de date
      */
-    public static function getDates($pdo, $dateDebut, $dateFin, $codeUtilisateur)
+    public function getDates($pdo, $dateDebut, $dateFin, $codeUtilisateur)
     {
         try {
             $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(DATE_HEURE, '%Y-%m-%d') FROM humeur WHERE DATE_HEURE BETWEEN :dateDebut AND :dateFin AND CODE_UTILISATEUR = :codeUtilisateur ORDER BY DATE_FORMAT(DATE_HEURE, '%Y-%m-%d')");
@@ -100,7 +100,7 @@ class stathumeurservice
     /**
      * Renvoie le nb d'humeurs selon une emotion et selon une intervalle de dates
      */
-    public static function getNbHumeursParEmotions($pdo, $dateDebut, $dateFin, $codeEmotion, $codeUtilisateur)
+    public function getNbHumeursParEmotions($pdo, $dateDebut, $dateFin, $codeEmotion, $codeUtilisateur)
     {
         try {
             $stmt = $pdo->prepare("SELECT DISTINCT DATE_FORMAT(DATE_HEURE, '%Y-%m-%d') FROM humeur WHERE DATE_HEURE BETWEEN :dateDebut AND :dateFin AND CODE_UTILISATEUR = :codeUtilisateur ORDER BY DATE_FORMAT(DATE_HEURE, '%Y-%m-%d')");

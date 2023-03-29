@@ -9,7 +9,7 @@ class connexionservice
      * Chercher si l'identifiant existe dans la bd
      * @return true si trouver sinon false
      */
-    public static function identifiantExiste($pdo, $identifiant)
+    public function identifiantExiste($pdo, $identifiant)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE NOM_UTILISATEUR = ?");
@@ -29,7 +29,7 @@ class connexionservice
     /**
      * Verifie que le MDP correspond a l'identifiant
      */
-    public static function motDePasseValide($pdo, $identifiant, $motDePasse)
+    public function motDePasseValide($pdo, $identifiant, $motDePasse)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE NOM_UTILISATEUR = ? AND MOT_DE_PASSE = ?");
@@ -51,7 +51,7 @@ class connexionservice
      * Donne les infos de l'utilisateur sélectionné
      * retourne vrai si les informations ont pu être données sinon faux
      */
-    public static function getUtilisateur($pdo, $identifiant)
+    public function getUtilisateur($pdo, $identifiant)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE NOM_UTILISATEUR = ?");
@@ -68,7 +68,7 @@ class connexionservice
      * Donne les infos de l'utilisateur sélectionné
      * retourne vrai si les informations ont pu être données sinon faux
      */
-    public static function getUtilisateurById($pdo, $id)
+    public function getUtilisateurById($pdo, $id)
     {
         try {
             $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE ID_UTILISATEUR = ?");

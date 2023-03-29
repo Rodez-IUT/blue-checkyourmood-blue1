@@ -6,7 +6,7 @@ class humeurservice
 {
 
     /* Recupération des humeurs selon un utilisateur et selon l'émotion voulue et selon une date */
-    public static function getHumeursUtilisateurFiltres($pdo, $codeUtilisateur, $codeEmotion, $dateHeure)
+    public function getHumeursUtilisateurFiltres($pdo, $codeUtilisateur, $codeEmotion, $dateHeure)
     {
         try{
             $sql = "SELECT *
@@ -34,7 +34,7 @@ class humeurservice
     }
 
     /* Recupération des humeurs selon un utilisateur et selon une date */
-    public static function getHumeursUtilisateurDate($pdo, $codeUtilisateur, $dateHeure)
+    public function getHumeursUtilisateurDate($pdo, $codeUtilisateur, $dateHeure)
     {
         try {
             $sql = "SELECT *
@@ -61,7 +61,7 @@ class humeurservice
     }
 
     /* Recupération des humeurs selon un utilisateur et selon l'émotion voulue */
-    public static function getHumeursUtilisateurEmotion($pdo, $codeUtilisateur, $codeEmotion)
+    public function getHumeursUtilisateurEmotion($pdo, $codeUtilisateur, $codeEmotion)
     {
         try {
             $sql = "SELECT *
@@ -88,7 +88,7 @@ class humeurservice
     }
 
     /* Recupération des humeurs selon un utilisateur */
-    public static function getHumeursUtilisateur($pdo, $codeUtilisateur)
+    public function getHumeursUtilisateur($pdo, $codeUtilisateur)
     {
         try {
             $sql = "SELECT *
@@ -115,7 +115,7 @@ class humeurservice
     }
 
     /* Ajout d'une humeur */
-    public static function ajoutHumeur($pdo, $description, $dateHeure, $codeUtilisateur, $codeEmotion)
+    public function ajoutHumeur($pdo, $description, $dateHeure, $codeUtilisateur, $codeEmotion)
     {
 
         $sql = "INSERT INTO `humeur` (`DESCRIPTION`, `DATE_HEURE`, `CODE_UTILISATEUR`, `CODE_EMOTION`) 
@@ -147,7 +147,7 @@ class humeurservice
     }
 
     /* Suppression d'une humeur */
-    public static function suppHumeursUtilisateur($pdo, $codeUtilisateur, $idHumeur)
+    public function suppHumeursUtilisateur($pdo, $codeUtilisateur, $idHumeur)
     {
         $pdo->beginTransaction(); 
 
@@ -167,7 +167,7 @@ class humeurservice
     }
 
     /* Suppression d'une humeur */
-    public static function suppToutesHumeursUtilisateur($pdo, $codeUtilisateur)
+    public function suppToutesHumeursUtilisateur($pdo, $codeUtilisateur)
     {
         $pdo->beginTransaction(); 
         

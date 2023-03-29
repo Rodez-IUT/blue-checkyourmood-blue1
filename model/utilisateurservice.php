@@ -10,7 +10,7 @@ class utilisateurservice
      * Ajoute un utilisateur a la base de donnée
      * @return true si trouver sinon false
      */
-    public static function ajouterUtilisateur($pdo, $nom, $prenom, $mail, $nomUtilisateur, $genre, $dateNaissance, $motDePasse)
+    public function ajouterUtilisateur($pdo, $nom, $prenom, $mail, $nomUtilisateur, $genre, $dateNaissance, $motDePasse)
     {
         //Cryptage du mot de passe
         $mdp  = hash('sha1', htmlspecialchars($motDePasse));
@@ -24,6 +24,7 @@ class utilisateurservice
             $stmt->execute([$nom, $prenom, $nomUtilisateur, $mdp, $mail,  $genre, $dateNaissance]);
             $_GET['creation'] = true;
             $pdo->commit();
+
         } catch (\PDOException $e) {
             $code = $e -> getCode();
             if ($code == 23000) {
@@ -33,18 +34,18 @@ class utilisateurservice
                 $_GET['exception'] = $e;
             }
             $pdo->rollBack();
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             $_GET['creation'] = false;
             $e->getMessage();
             $_GET['exception'] = $e;
             var_dump($e);
             $pdo->rollBack();
         }
-       
+        return true;
     }
 
     /* Supprimer un utilisateur */
-    public static function suppUtilisateur($pdo, $codeUtilisateur)
+    public function suppUtilisateur($pdo, $codeUtilisateur)
     {
         $sql = "DELETE FROM `utilisateur` WHERE ID_UTILISATEUR = ?";
         $pdo->beginTransaction();
@@ -53,14 +54,14 @@ class utilisateurservice
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$codeUtilisateur]);
             $pdo->commit();
-        } catch (Exception $e) {
+        } catch (\PDOException $e) {
             $pdo->rollBack();
             $e -> getMessage();
         }
     }
 
     /* Modifier profil */
-    public static function modifierProfil($pdo, $nom, $prenom, $nomUtilisateur, $mail, $genre, $dateNaissance, $codeUtilisateur)
+    public function modifierProfil($pdo, $nom, $prenom, $nomUtilisateur, $mail, $genre, $dateNaissance, $codeUtilisateur)
     {
 
         $sql = "UPDATE utilisateur
@@ -97,7 +98,7 @@ class utilisateurservice
     }
 
     /* Modifier profil */
-    public static function modifierMotDePasse($pdo, $motDePasse, $codeUtilisateur)
+    public function modifierMotDePasse($pdo, $motDePasse, $codeUtilisateur)
     {
         $motDePasse = sha1($motDePasse);
 
