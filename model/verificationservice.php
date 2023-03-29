@@ -2,7 +2,7 @@
 
 namespace model;
 
-class verificationservice
+class VerificationService
 {
 
     /**

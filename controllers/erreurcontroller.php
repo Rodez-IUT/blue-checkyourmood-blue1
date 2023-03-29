@@ -1,10 +1,5 @@
 <?php
 
-/**
- * erreurcontroller.php
- * @author Info2 IUT Rodez Oskar Morel, Simon Launay, Rémi Jauzion, Antoine Gouzy, Gauthier Jalbaud
- * @CheckYourMood 2022-2023
- */
 
 namespace controllers;
 
@@ -14,11 +9,11 @@ use yasmf\config;
 use yasmf\httphelper;
 
 /**
- * Class erreurcontroller
+ * Class ErreurController
  * Permet d'indiquer une erreur
  * @package controllers
  */
-class erreurController implements controller
+class ErreurController implements controller
 {
     /**
      * @param pdo connexion à la base de données

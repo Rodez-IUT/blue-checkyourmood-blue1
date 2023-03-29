@@ -21,7 +21,7 @@ use model\afficher;
  * Permet a un utilisateur de modifier son mot de passe
  * @package controllers
  */
-class modificationMotDePasseController implements controller
+class ModificationMotDePasseController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

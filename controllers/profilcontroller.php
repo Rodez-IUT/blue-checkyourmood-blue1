@@ -20,7 +20,7 @@ use model\utilisateurservice;
  * Permet a un utilisateur de visualiser ses informations
  * @package controllers
  */
-class profilController implements controller
+class ProfilController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

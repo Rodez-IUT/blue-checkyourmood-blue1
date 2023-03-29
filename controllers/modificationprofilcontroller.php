@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ModificationProfil.php
+ * ModificationProfilController.php
  * @author Info2 IUT Rodez Oskar Morel, Simon Launay, Rémi Jauzion, Antoine Gouzy, Gauthier Jalbaud
  * @CheckYourMood 2022-2023
  */

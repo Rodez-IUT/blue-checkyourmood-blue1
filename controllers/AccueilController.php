@@ -17,7 +17,7 @@ use yasmf\config;
  * Page d'accueil permet d'appeler la vue pour la page d'accueil de l'application
  * @package controllers
  */
-class accueilController implements controller
+class AccueilController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

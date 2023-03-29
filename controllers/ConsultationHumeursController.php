@@ -1,7 +1,6 @@
 <?php
 
-/**
- * consulterHumeursController.php
+/*
  * @author Info2 IUT Rodez Oskar Morel, Simon Launay, Rémi Jauzion, Antoine Gouzy, Gauthier Jalbaud
  * @CheckYourMood 2022-2023
  */
@@ -21,7 +20,7 @@ use model\emotionsservice;
  * Permet a un utilisateur de pouvoir consulter ses humeurs
  * @package controllers
  */
-class consultationHumeursController implements controller
+class ConsultationHumeursController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

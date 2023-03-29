@@ -3,7 +3,7 @@
 namespace model;
 use PDO;
 
-class utilisateurservice
+class UtilisateurService
 {
 
     /**

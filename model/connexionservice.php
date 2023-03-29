@@ -2,8 +2,11 @@
 
 namespace model;
 
-class connexionservice
+class ConnexionService
 {
+
+
+
 
     /**
      * Chercher si l'identifiant existe dans la bd

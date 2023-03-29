@@ -20,7 +20,7 @@ use model\stathumeurservice;
  * Permet a un utilisateur de visualiser ses humeurs dans le temps
  * @package controllers
  */
-class visualisationHumeursController implements controller
+class VisualisationHumeursController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

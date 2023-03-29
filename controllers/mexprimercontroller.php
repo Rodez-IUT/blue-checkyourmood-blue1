@@ -20,7 +20,7 @@ use model\humeurservice;
  * Permet a un utilisateur de saisir une humeur
  * @package controllers
  */
-class mexprimerController implements controller
+class MexprimerController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

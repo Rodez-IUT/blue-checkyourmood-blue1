@@ -17,7 +17,7 @@ use yasmf\config;
  * Permet d'acceder a la page de connexion de l'application
  * @package controllers
  */
-class indexController implements controller
+class IndexController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

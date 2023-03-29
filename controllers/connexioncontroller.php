@@ -1,7 +1,7 @@
 <?php
 
 /**
- * connexioncontroller.php
+ * ConnexionController.php
  * @author Info2 IUT Rodez Oskar Morel, Simon Launay, Rémi Jauzion, Antoine Gouzy, Gauthier Jalbaud
  * @CheckYourMood 2022-2023
  */
@@ -16,12 +16,12 @@ use model\connexionservice;
 use model\afficher;
 
 /**
- * Class connexioncontroller
+ * Class ConnexionController
  * Permet a un utilisateur de se connecter a l'application
  * et d'acceder a la page d'accueil
  * @package controllers
  */
-class connexionController implements controller
+class ConnexionController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

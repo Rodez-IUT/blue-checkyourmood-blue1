@@ -3,7 +3,7 @@
 namespace model;
 use DateTime;
 
-class stathumeurservice
+class StatHumeurService
 {
 
     /**

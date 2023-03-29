@@ -20,7 +20,7 @@ use model\utilisateurservice;
  * Permet a un utilisateur de s'inscrire sur l'application
  * @package controllers
  */
-class inscriptionController implements controller
+class InscriptionController implements controller
 {
     /**
      * @param $pdo connexion à la base de données

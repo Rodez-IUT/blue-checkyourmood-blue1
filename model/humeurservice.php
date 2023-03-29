@@ -2,7 +2,7 @@
 
 namespace model;
 
-class humeurservice
+class HumeurService
 {
 
     /* Recupération des humeurs selon un utilisateur et selon l'émotion voulue et selon une date */
