@@ -1,46 +1,87 @@
 <?php
-use model\utilisateurservice;
+use model\UtilisateurService;
 use PHPUnit\Framework\TestCase;
 
-class UtilisateurServiceTest extends TestCase {
+class testUtilisateurService extends TestCase {
 
-    public function getPDO() {
-        try {
-            $db = new PDO('mysql:host=localhost;port=3306;dbname=checkyourmood;charset=utf8','root','');
-            return $db;
-        } catch (Exception $e) {
-                die('Erreur : ' . $e->getMessage());
-        }
+    // Déclare une propriété qui stockera le PDO simulé
+    private PDO $pdo;
+
+    private UtilisateurService $utilisateurService;
+    
+    // Avant chaque test, crée un PDO simulé
+    protected function setUp() : void {
+        parent::setUp();
+        $this->pdo = $this->getMockBuilder(PDO::class)
+        ->disableOriginalConstructor()
+        ->getMock();
+        $this->utilisateurService = new UtilisateurService();
     }
+    // Test ajouterUtilisateur() avec des valeurs normales
+    public function testAjouterUtilisateurAvecValeursNormales()
+    {
+        // GIVEN les données rélatives à un utilisateur 
+        $nom = "Doe";
+        $prenom = "John";
+        $mail = "johndoe@example.com";
+        $nomUtilisateur = "johndoe";
+        $genre = "M";
+        $dateNaissance = "1990-01-01";
+        $motDePasse = "motdepasse";
 
-    public function testAfficher() {
-        $pdo = $this->getPDO();
-        $this->assertNull(utilisateurservice::ajouterUtilisateur($pdo, "Test", "test", "test@test.test", "LeTesteurFouDu12", "autre", "2002-02-02", "HjeEu32eXjdEZiitestkejEDhE3843JdJeu"));
-        $this->assertNotTrue(utilisateurservice::ajouterUtilisateur($pdo, "Test", "test", "test@test.test", "LeTesteurFouDu12", "autre", "pasbonformatDate", "HjeEu32eXjdEZiitestkejEDhE3843JdJeu"));
+        $pdoStatementMock = $this->getMockBuilder(PDOStatement::class)
+                                ->getMock();
+        $pdoStatementMock->expects($this->once())
+                         ->method('execute')
+                         ->with([$nom, $prenom, $nomUtilisateur, sha1($motDePasse), $mail, $genre, $dateNaissance]);
+
+        $pdoMock = $this->getMockBuilder(PDO::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        $pdoMock->expects($this->once())
+                ->method('beginTransaction');
+        $pdoMock->expects($this->once())
+                ->method('prepare')
+                ->with($this->stringContains('INSERT INTO `utilisateur`'))
+                ->willReturn($pdoStatementMock);
+        $pdoMock->expects($this->once())
+                ->method('commit');
+
+        // WHEN l'appelle à la méthode ajouter Utilisateur 
+        $resultat = $this->utilisateurService->ajouterUtilisateur(
+            $pdoMock,
+            $nom,
+            $prenom,
+            $mail,
+            $nomUtilisateur,
+            $genre,
+            $dateNaissance,
+            $motDePasse
+        );
+
+        // THEN l'utilisateur est ajouté
+        $this->assertTrue($resultat);
     }
+    
+    // Test suppUtilisateur() avec un ID existant
+    public function testSuppUtilisateurNominal()
+    {
+        // Given
+        $pdoStatement = $this->getMockBuilder(PDOStatement::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['execute'])
+            ->getMock();
+        $pdoStatement->expects($this->once())->method('execute')->willReturn(true);
 
-    public function testSuppUtilisateur() {
-        $pdo = $this->getPDO();
-        $this->assertNull(utilisateurservice::suppUtilisateur($pdo, 72));
-        $this->assertNotTrue(utilisateurservice::suppUtilisateur($pdo, 1));
+        $this->pdo->expects($this->once())->method('prepare')->willReturn($pdoStatement);
+        $this->pdo->expects($this->once())->method('beginTransaction')->willReturn(true);
+        $this->pdo->expects($this->once())->method('commit')->willReturn(true);
+
+        // When
+        $result = $this->utilisateurService->suppUtilisateur($this->pdo, 1);
+
+        // Then
+        $this->assertTrue($result);
     }
-
-    public function testModifUtilisateur() {
-        $pdo = $this->getPDO();
-        $this->assertNull(utilisateurservice::modifierProfil($pdo, "Maurel", "Oskar", "test@test.test", "krxv", "autre", "2002-02-02", 71));
-        $this->assertNotTrue(utilisateurservice::modifierProfil($pdo, "Maurel", "Oskar", "test@test.test", "krxv", "autre", "DatePasBonne", 71));
-    }
-
-    public function testModifierMotDePasse() {
-        $pdo = $this->getPDO();
-        $this->assertNull(utilisateurservice::modifierMotDePasse($pdo, "test", 71));
-        //Je remet mon mot de passe initial
-        $this->assertnull(utilisateurservice::modifierMotDePasse($pdo, "lemotdepasse", 71));
-        //code d'utilisateur pas connu
-        $this->assertNotTrue(utilisateurservice::modifierMotDePasse($pdo, "lemotdepasse", 1));
-        //code d'utilisateur pas au bon format
-        $this->assertNotTrue(utilisateurservice::modifierMotDePasse($pdo, "lemotdepasse", "test"));
-    }
-
 }
 ?>

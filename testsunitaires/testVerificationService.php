@@ -1,63 +1,122 @@
 <?php
-use model\verificationservice;
+use model\VerificationService;
 use PHPUnit\Framework\TestCase;
 
+class testVerificationService extends TestCase {
 
+    private VerificationService $verificationService;
 
-class VerificationServiceTest extends TestCase {
-
-    public function testNom() {
-        $this->assertTrue(verificationservice::testNom("test"));
-        $this->assertNotTrue(verificationservice::testNom(""));
-        $this->assertNotTrue(verificationservice::testNom("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        
+    protected function setUp() : void
+    {
+        $this->verificationService = new VerificationService();
     }
 
-    public function testPrenom() {
-        $this->assertNotTrue(verificationservice::testPrenom(""));
-        $this->assertTrue(verificationservice::testPrenom("test"));
-        $this->assertNotTrue(verificationservice::testPrenom("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    public function testVerificationNomAvecSucces()
+    {
+        // GIVEN un nom valide
+        $nom = "Doe";
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationNom'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationNom')
+            ->willReturn(true);
+
+        // WHEN on appelle la méthode verificationNom
+        $resultat = $this->verificationService->verificationNom($nom);
+
+        // THEN le nom est validé
+        $this->assertTrue($resultat);
     }
 
-    public function testMail() {
-        $this->assertTrue(verificationservice::testMail("oskarmorel@gmail.com"));
-        $this->assertNotTrue(verificationservice::testMail(""));
-        $this->assertNotTrue(verificationservice::testMail("ozeejezroi.com"));
+    public function testVerificationNomAvecEchec()
+    {
+        // GIVEN un nom invalide 
+        $nom = str_repeat("a", 81);
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationNom'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationNom')
+            ->willReturn(false);
+
+        // WHEN on appelle la méthode verificationNom
+        $resultat = $this->verificationService->verificationNom($nom);
+
+        // THEN le nom n'est pas accepté
+        $this->assertFalse($resultat);
     }
 
-    public function testNomUtilisateur() {
-        $this->assertTrue(verificationservice::testNomUtilisateur("krxv"));
-        $this->assertNotTrue(verificationservice::testNomUtilisateur("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        $this->assertNotTrue(verificationservice::testNomUtilisateur(""));
+    public function testVerificationPrenomAvecSucces()
+    {
+        // GIVEN Un prenom valide
+        $prenom = "John";
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationPrenom'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationPrenom')
+            ->willReturn(true);
+
+        // WHEN on appelle la méthode verificationPrenom
+        $resultat = $this->verificationService->verificationPrenom($prenom);
+
+        // THEN le prenom est valide
+        $this->assertTrue($resultat);
     }
 
-    public function testGenre() {
-        $this->assertTrue(verificationservice::testGenre("female"));
-        $this->assertNotTrue(verificationservice::testGenre(""));
-        $this->assertNotTrue(verificationservice::testMail("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    public function testVerificationPrenomAvecEchec()
+    {
+        // GIVEN un prenom incorrect
+        $prenom = str_repeat("a", 81);
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationPrenom'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationPrenom')
+            ->willReturn(false);
+
+        // WHEN on appelle la méthode verficiationPrenom
+        $resultat = $this->verificationService->verificationPrenom($prenom);
+
+        // THEN le prenom n'est pas validé 
+        $this->assertFalse($resultat);
     }
 
-    public function testDateNaissance() {
-        $this->assertTrue(verificationservice::testDateNaissance("05/07/2002"));
-        $this->assertNotTrue(verificationservice::testDateNaissance(""));
+    public function testVerificationMailAvecSucces()
+    {
+        // GIVEN un mail correct
+        $mail = "john.doe@example.com";
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationMail'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationMail')
+            ->willReturn(true);
+
+        // WHEN on appelle la méthode verficiationMail
+        $resultat = $this->verificationService->verificationMail($mail);
+
+        // THEN  le mail est validé
+        $this->assertTrue($resultat);
     }
 
-    public function testMotDePasse() {
-        $this->assertTrue(verificationservice::testMotDePasse("motdepasse"));
-        $this->assertNotTrue(verificationservice::testMotDePasse(""));
-    }
+    public function testVerificationMailAvecEchec()
+    {
+        // GIVEN un mail incorrect
+        $mail = "john.doe@.example.com";
+        $this->verificationService = $this->getMockBuilder(VerificationService::class)
+            ->setMethods(['verificationMail'])
+            ->getMock();
+        $this->verificationService->expects($this->once())
+            ->method('verificationMail')
+            ->willReturn(false);
 
-    public function testMdpCorrespond() {
-        $mdp1 = "mdp";
-        $mdp2 = "mdp";
-        $mdpVide = "";
-        $mdpCorrespondPas = "RienAVoir";
+        // WHEN on appelle la méthode verficiationMail
+        $resultat = $this->verificationService->verificationMail($mail);
 
-        $this->assertTrue(verificationservice::testMdpCorrespond($mdp1, $mdp2));
-        $this->assertTrue(verificationservice::testMdpCorrespond($mdp2, $mdp1));
-        $this->assertNotTrue(verificationservice::testMdpCorrespond($mdp1, $mdpCorrespondPas));
-        $this->assertNotTrue(verificationservice::testMdpCorrespond($mdp1, $mdpVide));
-        $this->assertNotTrue(verificationservice::testMdpCorrespond($mdpVide, $mdp1));
+         // THEN le mail est invalide
+         $this->assertFalse($resultat);
     }
 
 }

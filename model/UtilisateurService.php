@@ -54,10 +54,13 @@ class UtilisateurService
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$codeUtilisateur]);
             $pdo->commit();
+            return true;
         } catch (\PDOException $e) {
             $pdo->rollBack();
             $e -> getMessage();
+            return false;
         }
+
     }
 
     /* Modifier profil */
@@ -80,6 +83,7 @@ class UtilisateurService
             $stmt->execute([$nom, $prenom, $nomUtilisateur, $mail, $genre, $dateNaissance, $codeUtilisateur]);
             $_GET['modification'] = true;
             $pdo->commit();
+            return true;
         } catch (\PDOException $e) {
             $code = $e -> getCode();
             if ($code == 23000) {
@@ -94,6 +98,7 @@ class UtilisateurService
             $e->getMessage();
             $_GET['modification'] = false;
         }
+
         
     }
 
@@ -120,4 +125,76 @@ class UtilisateurService
             $_GET['modification'] = false;
         }
     }
+    public function testModifierMotDePasseAvecSucces()
+    {
+        // GIVEN
+        $codeUtilisateur = 1;
+        $motDePasse = "test123";
+        $motDePasseCrypte = sha1($motDePasse);
+
+        $pdoStatementMock = $this->getMockBuilder(PDOStatement::class)
+                                ->getMock();
+        $pdoStatementMock->expects($this->once())
+                        ->method('execute')
+                        ->with([$motDePasseCrypte, $codeUtilisateur]);
+
+        $pdoMock = $this->getMockBuilder(PDO::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        $pdoMock->expects($this->once())
+                ->method('beginTransaction');
+        $pdoMock->expects($this->once())
+                ->method('prepare')
+                ->with($this->stringContains('UPDATE utilisateur'))
+                ->willReturn($pdoStatementMock);
+        $pdoMock->expects($this->once())
+                ->method('commit');
+
+        // WHEN
+        $resultat = $this->utilisateurService->modifierMotDePasse(
+            $pdoMock,
+            $motDePasse,
+            $codeUtilisateur
+        );
+
+        // THEN
+        $this->assertTrue($resultat);
+        $this->assertTrue(isset($_GET['modification']));
+        $this->assertTrue($_GET['modification']);
+    }
+    
+    public function testModifierMotDePasseAvecEchec()
+    {
+        // GIVEN
+        $codeUtilisateur = 1;
+        $motDePasse = "test123";
+        $motDePasseCrypte = sha1($motDePasse);
+
+        $pdoMock = $this->getMockBuilder(PDO::class)
+                        ->disableOriginalConstructor()
+                        ->getMock();
+        $pdoMock->expects($this->once())
+                ->method('beginTransaction');
+        $pdoMock->expects($this->once())
+                ->method('prepare')
+                ->with($this->stringContains('UPDATE utilisateur'))
+                ->will($this->throwException(new PDOException('Erreur SQL')));
+        $pdoMock->expects($this->once())
+                ->method('rollBack');
+
+        // WHEN
+        $resultat = $this->utilisateurService->modifierMotDePasse(
+            $pdoMock,
+            $motDePasse,
+            $codeUtilisateur
+        );
+
+        // THEN
+        $this->assertFalse($resultat);
+        $this->assertTrue(isset($_GET['modification']));
+        $this->assertFalse($_GET['modification']);
+        $this->assertTrue(isset($_GET['exception']));
+        }
+
+    
 }
