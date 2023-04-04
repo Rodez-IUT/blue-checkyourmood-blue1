@@ -4,10 +4,6 @@ namespace model;
 
 class ConnexionService
 {
-
-
-
-
     /**
      * Chercher si l'identifiant existe dans la bd
      * @return true si trouver sinon false
@@ -24,7 +20,7 @@ class ConnexionService
                 return true;
             }
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
             exit();
         }
     }
@@ -44,7 +40,7 @@ class ConnexionService
                 return true;
             }
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
             exit();
         }
                
@@ -62,7 +58,7 @@ class ConnexionService
             $user = $stmt->fetch();
             return $user;
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
             exit();
         }
     }
@@ -79,7 +75,7 @@ class ConnexionService
             $user = $stmt->fetch();
             return $user;
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
             exit();
         }
     }

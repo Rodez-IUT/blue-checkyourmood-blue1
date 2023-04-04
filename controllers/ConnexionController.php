@@ -13,7 +13,6 @@ use yasmf\controller;
 use yasmf\httphelper;
 use yasmf\config;
 use model\connexionservice;
-use model\afficher;
 
 /**
  * Class ConnexionController
@@ -23,6 +22,16 @@ use model\afficher;
  */
 class ConnexionController implements controller
 {
+
+    private ConnexionService $service; 
+
+    /**
+     * Create a new default controller
+     */
+    public function __construct(ConnexionService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * @param $pdo connexion à la base de données
      * @param $err message d'erreur
@@ -50,8 +59,8 @@ class ConnexionController implements controller
             $identifiant = httphelper::getParam('identifiant');
             $motDePasse = httphelper::getParam('motDePasse');
 
-            if (connexionservice::identifiantExiste($pdo, $identifiant)) {
-                if (connexionservice::motDePasseValide($pdo, $identifiant, $motDePasse)) {
+            if ($this->service->identifiantExiste($pdo, $identifiant)) {
+                if ($this->service->motDePasseValide($pdo, $identifiant, $motDePasse)) {
                     $connect = true;
                 } else {
                     $err = 'identifiantmdp';
@@ -68,7 +77,7 @@ class ConnexionController implements controller
             
             //TODO faire la mise en place des sessions et appeler la methode getUtilisateur 
             session_start();
-            $user = connexionservice::getUtilisateur($pdo, $identifiant);
+            $user = $this->service->getUtilisateur($pdo, $identifiant);
 
             $_SESSION['numeroSession']=session_id();
             $_SESSION['id']=$user['ID_UTILISATEUR'];	
@@ -79,7 +88,7 @@ class ConnexionController implements controller
             $_SESSION['genre']=$user['GENRE'];	
             $_SESSION['date_naissance']=$user['DATE_DE_NAISSANCE'];	
 
-            header("Location: /?controller=accueil");
+            header("Location: /?Controller=Accueil");
             exit();
         }
 
@@ -100,7 +109,7 @@ class ConnexionController implements controller
         // suppression de la session en cours et de toutes les variables associées
         session_destroy();
 
-        header("Location: /?controller=index");
+        header("Location: /?Controller=index");
         exit();
     }
 }
