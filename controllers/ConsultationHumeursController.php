@@ -11,9 +11,9 @@ use yasmf\view;
 use yasmf\controller;
 use yasmf\httphelper;
 use yasmf\config;
-use model\verificationservice;
-use model\humeurservice;
-use model\emotionsservice;
+use model\VerificationService;
+use model\HumeurService;
+use model\EmotionsService;
 
 /**
  * Class de consulterHumeursController
@@ -22,6 +22,19 @@ use model\emotionsservice;
  */
 class ConsultationHumeursController implements controller
 {
+    private HumeurSerice $humServ;
+    private VerificationService $verifServ;
+    private EmotionService $emServ;
+
+    /**
+     * Create a new default controller
+     */
+    public function __construct(HumeurService $humeurService, EmotionService $emoservice, VerificationService $verifServ)
+    {
+        $this->humServ = $humeurService;
+        $this->emServ = $emoservice;
+        $this->verifServ = $verifServ;
+    }
     /**
      * @param $pdo connexion à la base de données
      * @param $err message d'erreur

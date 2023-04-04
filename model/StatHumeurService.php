@@ -33,7 +33,7 @@ class StatHumeurService
             $texteFinal = $texteFinal.$texteSansCrochets."]";   
             return $texteFinal;
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            throw new \Exception("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
             exit();
         }
     }
@@ -143,6 +143,4 @@ class StatHumeurService
             exit();
         }
     }
-
-
 }

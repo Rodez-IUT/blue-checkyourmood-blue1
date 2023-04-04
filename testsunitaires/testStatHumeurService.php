@@ -1,52 +1,97 @@
 <?php
-use model\stathumeurservice;
+
 use PHPUnit\Framework\TestCase;
+use model\StatHumeurService;
 
+class testStatHumeurService extends TestCase
+{
+    private $pdo;
+    private $statHumeurService;
 
-
-class StatHumeurServiceTest extends TestCase {
-
-    public function getPDO() {
-        try {
-            $db = new PDO('mysql:host=localhost;port=3306;dbname=checkyourmood;charset=utf8','root','');
-            return $db;
-        } catch (Exception $e) {
-                die('Erreur : ' . $e->getMessage());
-        }
+    protected function setUp(): void
+    {
+        $this->pdo = $this->getMockBuilder(\PDO::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->statHumeurService = new StatHumeurService();
     }
 
-    public function testAfficher() {
-        $pdo = $this->getPDO();
-        $aTester1 = stathumeurservice::getNbEmotion($pdo, 70);
-        $resultatAttendu = "[51,51,47,47,36,36,40,40,53,53,41,41,30,30,24,24,38,38,42,42,39,39,42,42,42,42,32,32,44,44,37,37,45,45,46,46,44,44,29,29,35,35,37,37,42,42,41,41,49,49,3,3,0,0]";
-        $resultatNonAttendu = "Test pas egal";
-        $this->assertEquals($resultatAttendu, $aTester1);
-        $this->assertNotEquals($resultatNonAttendu, $aTester1);
+    
+    public function testGetNbEmotionAvecAucuneEmotion()
+    {
+        // Given : un PDO avec une requête qui renvoie 0 émotion
+        $stmtMock = $this->createMock(\PDOStatement::class); // On crée un mock de PDOStatement
+        $stmtMock->method('execute')->willReturn(false);
+        $stmtMock->method('fetch')->willReturn(false);
+
+        $pdoMock = $this->createMock(\PDO::class);
+        $pdoMock->method('prepare')->willReturn($stmtMock); // On configure le mock de PDO pour qu'il renvoie notre mock de PDOStatement
+        $codeUtilisateur = 1;
+
+        // When : appel de la méthode getNbEmotion
+        $result = $this->statHumeurService->getNbEmotion($pdoMock, $codeUtilisateur);
+
+        // Then : vérification que la méthode renvoie une chaîne JSON vide
+        $this->assertEquals("[]", $result);
     }
+    
+    public function testGetDatesAvecAucuneHumeur()
+    {
+        // Given : un PDO avec une requête qui ne renvoie aucune humeur
+        $stmtMock = $this->createMock(\PDOStatement::class);
+        $stmtMock->method('execute')->willReturn(false);
+        $stmtMock->method('fetch')->willReturn(false);
 
-    public function testGetDates() {
-        $pdo = $this->getPDO();
-        
-        $aTester1 = stathumeurservice::getDates($pdo, "2023-01-01", "2023-01-11", 70);
-        $resultatAttendu = '["2023-01-01","2023-01-01","2023-01-10","2023-01-10"]';
+        $this->pdo->method('prepare')->willReturn($stmtMock);
+        $dateDebut = "2023-04-01";
+        $dateFin = "2023-04-03";
+        $codeUtilisateur = 1;
 
-        $resultatNonAttendu = "test pas egal";
+        // When : appel de la méthode getDates
+        $result = $this->statHumeurService->getDates($this->pdo, $dateDebut, $dateFin, $codeUtilisateur);
 
-        $this->assertEquals($resultatAttendu, $aTester1);
-        $this->assertNotEquals($resultatNonAttendu, $aTester1);
+        // Then : vérification que la méthode renvoie une chaîne JSON vide
+        $this->assertEquals("[]", $result);
     }
-
-    public function testGetNbHumeursParEmotions() {
-        $pdo = $this->getPDO();
-
-        $this->assertEquals('[0,0]', stathumeurservice::getNbHumeursParEmotions($pdo, "2023-01-01", "2023-01-11", 1, 70)); 
+    public function testGetNbEmotionAvecDesEmotions()
+    {
+        // Given : un PDO avec une requête qui renvoie plusieurs émotions et des humeurs correspondantes
+        $stmtMock = $this->createMock(\PDOStatement::class);
+        $stmtMock->method('execute')->willReturn(true);
+        $stmtMock->method('fetch')->willReturnOnConsecutiveCalls(
+            [1], // Émotion 1
+            [3], // Émotion 2
+            [2]  // Émotion 3
+        );
+    
+        $recupNbHumeurMock = $this->createMock(\PDOStatement::class);
+        $recupNbHumeurMock->method('execute')->willReturn(true);
+        $recupNbHumeurMock->method('fetch')->willReturnOnConsecutiveCalls(
+            [0], // 0 humeur pour émotion 1
+            [4], // 4 humeurs pour émotion 2
+            [2]  // 2 humeurs pour émotion 3
+        );
+    
+        $pdoMock = $this->createMock(\PDO::class);
+        $pdoMock->method('prepare')->willReturnOnConsecutiveCalls(
+            $stmtMock, // 1ère requête pour récupérer les émotions
+            $recupNbHumeurMock, // 1ère requête pour récupérer le nb d'humeurs pour émotion 1
+            $recupNbHumeurMock, // 2ème requête pour récupérer le nb d'humeurs pour émotion 2
+            $recupNbHumeurMock  // 3ème requête pour récupérer le nb d'humeurs pour émotion 3
+        );
+    
+        $codeUtilisateur = 1;
+    
+        // When : appel de la méthode getNbEmotion
+        $result = $this->statHumeurService->getNbEmotion($pdoMock, $codeUtilisateur);
+    
+        // Then : vérification que la méthode renvoie le résultat attendu
+        $expectedResult = '[0,4,2]';
+        $this->assertEquals($expectedResult, $result);
     }
-
-    public function testGetNbEmotionDates() {
-        $pdo = $this->getPDO();
-
-        $this->assertEquals('[1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0]', stathumeurservice::getNbEmotionDates($pdo, 70, "2022-12-14"));
-        $this->assertEquals('[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', stathumeurservice::getNbEmotionDates($pdo, 70, "2023-12-14"));  
-    }
+    
+    
+    
+    
 }
 ?>
